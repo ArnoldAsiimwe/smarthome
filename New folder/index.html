@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-home"></i> Smart Home Dashboard</h1>
+            <div class="user-profile">
+                <span>Welcome, User</span>
+                <div class="profile-pic"></div>
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-robot"></i> Devices</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Routines</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sync-section">
+                <button id="syncBtn" class="sync-btn"><i class="fas fa-sync"></i> Sync Devices</button>
+                <div class="sync-status">Last synced: <span id="lastSynced">Never</span></div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="devices-section">
+                <h2>Your Smart Devices</h2>
+                <div class="devices-grid">
+                    <!-- Devices will be added here dynamically -->
+                </div>
+            </section>
+
+            <section class="routines-section">
+                <div class="section-header">
+                    <h2>Scheduled Routines</h2>
+                    <button id="addRoutineBtn" class="add-btn"><i class="fas fa-plus"></i> Add Routine</button>
+                </div>
+                <div class="routines-list">
+                    <!-- Routines will be added here dynamically -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Routine Modal -->
+    <div id="routineModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Create New Routine</h2>
+            <form id="routineForm">
+                <div class="form-group">
+                    <label for="routineName">Routine Name</label>
+                    <input type="text" id="routineName" required>
+                </div>
+                <div class="form-group">
+                    <label for="routineTime">Time</label>
+                    <input type="time" id="routineTime" required>
+                </div>
+                <div class="form-group">
+                    <label>Days</label>
+                    <div class="days-selector">
+                        <label><input type="checkbox" name="day" value="Mon"> Mon</label>
+                        <label><input type="checkbox" name="day" value="Tue"> Tue</label>
+                        <label><input type="checkbox" name="day" value="Wed"> Wed</label>
+                        <label><input type="checkbox" name="day" value="Thu"> Thu</label>
+                        <label><input type="checkbox" name="day" value="Fri"> Fri</label>
+                        <label><input type="checkbox" name="day" value="Sat"> Sat</label>
+                        <label><input type="checkbox" name="day" value="Sun"> Sun</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Actions</label>
+                    <div class="actions-container" id="actionsContainer">
+                        <!-- Actions will be added here -->
+                    </div>
+                    <button type="button" id="addActionBtn" class="add-action-btn">+ Add Action</button>
+                </div>
+                <button type="submit" class="submit-btn">Save Routine</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Action Modal -->
+    <div id="actionModal" class="modal action-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Add Action</h2>
+            <form id="actionForm">
+                <div class="form-group">
+                    <label for="actionDevice">Device</label>
+                    <select id="actionDevice" required>
+                        <!-- Devices will be populated here -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="actionCommand">Command</label>
+                    <select id="actionCommand" required>
+                        <option value="">Select a command</option>
+                        <option value="turnOn">Turn On</option>
+                        <option value="turnOff">Turn Off</option>
+                        <option value="setTemperature">Set Temperature</option>
+                        <option value="setBrightness">Set Brightness</option>
+                        <option value="playMusic">Play Music</option>
+                    </select>
+                </div>
+                <div class="form-group" id="valueInput" style="display: none;">
+                    <label for="actionValue">Value</label>
+                    <input type="number" id="actionValue" min="0" max="100">
+                </div>
+                <button type="submit" class="submit-btn">Add Action</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
